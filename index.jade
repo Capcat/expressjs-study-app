@@ -1,0 +1,10 @@
+doctype html
+html(lang="en")
+    head
+        title= "Service index"
+    body
+        h1 Jade!
+        ul
+            each service in services
+                li
+                a(href='/' + service.name)= service.name

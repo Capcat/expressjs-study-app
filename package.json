@@ -4,7 +4,8 @@
   "description": "Service management app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/Capcat/expressjs-study-app/issues"
   },
-  "homepage": "https://github.com/Capcat/expressjs-study-app#readme"
+  "homepage": "https://github.com/Capcat/expressjs-study-app#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "jade": "^1.11.0",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
 }
