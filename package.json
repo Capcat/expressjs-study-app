@@ -1,0 +1,29 @@
+{
+  "name": "expressis-study-app",
+  "version": "1.0.0",
+  "description": "Service management app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Capcat/expressjs-study-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Capcat/expressjs-study-app/issues"
+  },
+  "homepage": "https://github.com/Capcat/expressjs-study-app#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "jade": "^1.11.0",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
