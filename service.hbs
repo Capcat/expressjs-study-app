@@ -2,6 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <title>Service index</title>
     <style>
         * {
@@ -19,14 +28,29 @@
 
     </style>
 </head>
+<header>
+    <div class="container" style="background-color: aqua">
+        <img src="{{service.image}}">
+        <h1>{{service.name}}</h1>
+    </div>
+</header>
 <body>
+    <div class="container" style="background-color: #ffcc00">
+        <table class="table table-bordered" style="background-color: antiquewhite">
+            <tr>
+                <td><b>category:</b> {{service.category}}</td>
+            </tr>
+            <tr>
+                <td><b>price:</b> {{service.price}}</td>
+            </tr>
+            <tr>
+                <td><b>description:</b> {{service.description}}</td>
+            </tr>
+            <tr>
+                <td><b>duration: </b>{{service.duration}}</td>
+            </tr>
+        </table>
+    </div>
 
-<h1>{{service.name}}</h1>
-           <img src="{{service.image}}">
-            <p><b>category:</b> {{service.category}}<br>
-                <b> price:</b> {{service.price}}<br>
-                <b>description:</b> {{service.description}}<br>
-                <b>duration: </b>{{service.duration}}<br>
-            </p>
 </body>
 </html>
