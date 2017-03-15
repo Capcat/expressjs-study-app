@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Service index</title>
+    <style>
+        * {
+            font-family: Arial;
+        }
+        div{
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            font-size: 1.2em;
+        }
+        div{
+            padding-left: 0.5em;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>{{service.name}}</h1>
+           <img src="{{service.image}}">
+            <p><b>category:</b> {{service.category}}<br>
+                <b> price:</b> {{service.price}}<br>
+                <b>description:</b> {{service.description}}<br>
+                <b>duration: </b>{{service.duration}}<br>
+            </p>
+</body>
+</html>
