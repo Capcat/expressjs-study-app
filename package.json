@@ -4,7 +4,7 @@
   "description": "Service management app",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node --harmony index.js",
     "dev": "nodemon index.js"
   },
   "repository": {
@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/Capcat/expressjs-study-app#readme",
   "dependencies": {
+    "consolidate": "^0.14.5",
     "express": "^4.15.2",
+    "handlebars": "^4.0.6",
     "jade": "^1.11.0",
     "lodash": "^4.17.4"
   },
