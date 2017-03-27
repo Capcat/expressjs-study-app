@@ -9,7 +9,12 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
     <!-- Latest compiled and minified JavaScript -->
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <title>Service index</title>
     <style>
@@ -27,6 +32,7 @@
         }
 
     </style>
+    <script type="text/javascript" src="index.client.js" />
 </head>
 <header>
     <div class="container" style="background-color: aqua">
@@ -35,7 +41,7 @@
     </div>
 </header>
 <body>
-    <div class="container" style="background-color: #ffcc00">
+    <in class="container" style="background-color: #ffcc00">
         <table class="table table-bordered" style="background-color: antiquewhite">
             <tr>
                 <td><b>category:</b> {{service.category}}</td>
@@ -51,6 +57,6 @@
             </tr>
         </table>
     </div>
-
+        <input type="button" onClick="save" value="Save" />
 </body>
 </html>
