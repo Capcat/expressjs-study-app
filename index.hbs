@@ -29,6 +29,8 @@
 </header>
 <body>
     <div class="container" style="background-color: gold">
+        <a href="/sort/name">Sort by name</a>
+        <a href="/sort/price">Sort by price</a>
         <table class="table">
             <tr>
                 <td>
@@ -40,6 +42,7 @@
                             <a href="/{{service.id}}">
                                 {{service.name}}
                             </a>
+                            {{service.price}}
                         </div>
                     {{/each}}
                 </td>
