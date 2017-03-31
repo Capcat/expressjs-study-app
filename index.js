@@ -4,6 +4,7 @@ var app = express()
 var fs = require('fs')
 var _ = require('lodash')
 var engines = require('consolidate')
+var bodyParser = require('body-parser')
 
 var services =[]
 
@@ -18,6 +19,7 @@ fs.readFile('models/services.json', {encoding: 'utf8'}, function (err, data) {
 app.engine('hbs', engines.handlebars)
 app.set('views', './')
 app.set('view engine', 'hbs')
+app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
 res.render('index', {services: services})
@@ -47,7 +49,10 @@ app.get('/:id', function (req, res) {
 })
 
 app.put('/api/service/:id', function (req, res) {
+    console.log(req.body);
+    
 
+    res.end()
 });
 
 var server = app.listen(3000, function () {

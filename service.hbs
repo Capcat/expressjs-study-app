@@ -22,8 +22,7 @@
                   id: '{{service.id}}',
                   name: '{{service.name}}'
                 })
-            }).then(json)
-            .then(function (data) {
+            }).then(function (data) {
                 console.log('Request succeeded with JSON response', data);
             })
             .catch(function (error) {
