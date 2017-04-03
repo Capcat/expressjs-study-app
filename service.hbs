@@ -13,30 +13,39 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
         function save() {
-            fetch(window.location.origin + '/api/service/{{service.id}}', {
+            $.ajax('/api/service/{{service.id}}', {
                 method: 'PUT',
-                headers: {
-                    "Content-Type": "application/json"
+                data: {
+                    category: $('#category').val(),
+                    price: $('#price').val(),
+                    description: $('#description').val(),
+                    duration: $('#duration').val(),
                 },
-                body: JSON.stringify({
-                  id: '{{service.id}}',
-                  name: '{{service.name}}'
-                })
-            }).then(function (data) {
-                console.log('Request succeeded with JSON response', data);
+                complete: function () {
+                    cancel()
+                    location.reload()
+                }
             })
-            .catch(function (error) {
-                console.log('Request failed', error);
-            });
-
         }
 
         function init() {
             var service = '{{service.name}}';
             console.log("service", service);
         }
-
         init();
+        $( document ).ready(function() {
+            $('.view').show()
+            $('.edit').hide()
+        });
+
+        function edit() {
+            $('.view').hide()
+            $('.edit').show()
+        }
+        function cancel() {
+            $('.view').show()
+            $('.edit').hide()
+        }
     </script>
     <title>Service index</title>
     <style>
@@ -52,6 +61,9 @@
         div{
             padding-left: 0.5em;
         }
+        edit.hidden {
+            visibility: hidden;
+        }
 
     </style>
 </head>
@@ -62,22 +74,30 @@
     </div>
 </header>
 <body>
-    <in class="container" style="background-color: #ffcc00">
-        <table class="table table-bordered" style="background-color: antiquewhite">
-            <tr>
-                <td><b>category:</b> {{service.category}}</td>
-            </tr>
-            <tr>
-                <td><b>price:</b> {{service.price}}</td>
-            </tr>
-            <tr>
-                <td><b>description:</b> {{service.description}}</td>
-            </tr>
-            <tr>
-                <td><b>duration: </b>{{service.duration}}</td>
-            </tr>
-        </table>
+
+    <div class="container">
+       <dl>
+           <dt><a href="/" class="btn btn-default">Back to main page</a></dt>
+           <dt>Category</dt>
+           <dd class="view" >{{service.category}}</dd>
+           <dd class="edit" ><input id="category" type="text" value="{{service.category}}"></dd>
+           <dt>Price</dt>
+           <dd class="view" >{{service.price}}</dd>
+           <dd class="edit" ><input id="price" type="text" value="{{service.price}}"></dd>
+           <dt>Description</dt>
+           <dd class="view" >{{service.description}}</dd>
+           <dd class="edit" ><input id="description" type="text" value="{{service.description}}"></dd>
+           <dt>Duration</dt>
+           <dd class="view" >{{service.duration}}</dd>
+           <dd class="edit" ><input id="duration" type="text" value="{{service.duration}}"></dd>
+           <dt></dt>
+           <dd class="edit">
+               <input type="button" onclick="save()" value="Save" />
+               <input type="button" onclick="cancel()" value="Cancel" />
+           </dd>
+           <dt><button class="btn btn-default view"  onclick="edit()">Edit</button></dt>
+       </dl>
     </div>
-        <input type="button" onclick="save()" value="Save" />
+
 </body>
 </html>
