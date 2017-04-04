@@ -57,7 +57,6 @@ app.put('/api/service/:id', function (req, res) {
     let id = req.params.id;
     let service = services.find((item)=> item.id === id);
     service = Object.assign(service, req.body);
-    console.log(req.body);
     console.log("service", service);
     res.end()
 });

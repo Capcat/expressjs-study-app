@@ -6,7 +6,7 @@
     "price": 7.23,
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "duration": 45,
-    "image": "http://lorempixel.com/output/people-q-c-64-64-8.jpg"
+    "image": "http://lorempixel.com/output/people-q-c-720-720-9.jpg"
   },
   {
     "id": "2",
@@ -15,7 +15,7 @@
     "price": 5.24,
     "description": "Duis vulputate arcu id urna interdum elementum.",
     "duration": 120,
-    "image": "http://lorempixel.com/output/people-q-c-64-64-7.jpg"
+    "image": "http://lorempixel.com/output/people-q-c-720-720-2.jpg"
   },
   {
     "id": "3",
@@ -24,7 +24,7 @@
     "price": 11.05,
     "description": "Cras maximus orci vel urna hendrerit interdum.",
     "duration": 320,
-    "image": "http://lorempixel.com/output/people-q-c-64-64-6.jpg"
+    "image": "http://lorempixel.com/output/city-q-c-720-720-10.jpg"
   },
   {
     "id": "4",
@@ -33,7 +33,7 @@
     "price": 11.25,
     "description": "Cras maximus orci vel urna hendrerit interdum ext.",
     "duration": 30,
-    "image": "http://lorempixel.com/output/people-q-c-64-64-5.jpg"
+    "image": "http://lorempixel.com/output/people-q-c-720-720-1.jpg"
   },
   {
     "id": "5",
@@ -42,6 +42,6 @@
     "price": 15.50,
     "description": "Lano modune upo canet.",
     "duration": 60,
-    "image": "http://lorempixel.com/output/people-q-c-64-64-4.jpg"
+    "image": "http://lorempixel.com/output/technics-q-c-720-720-2.jpg"
   }
 ]

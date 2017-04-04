@@ -23,7 +23,7 @@
                 },
                 complete: function () {
                     cancel()
-                    location.reload()
+                    location.reload();
                 }
             })
         }
@@ -49,54 +49,54 @@
     </script>
     <title>Service index</title>
     <style>
-        * {
-            font-family: Arial;
+       .img-rounded{
+           width: 70%;
+       }
+       .jumbotron{
+           padding-left: 10em;
+       }
+        .multi{
+            width:200px;
+            height:80px;
         }
-        div{
-            display: flex;
-            align-items: center;
-            padding: 1em;
-            font-size: 1.2em;
-        }
-        div{
-            padding-left: 0.5em;
-        }
-        edit.hidden {
-            visibility: hidden;
-        }
-
     </style>
 </head>
 <header>
-    <div class="container" style="background-color: aqua">
-        <img src="{{service.image}}">
+    <div class="jumbotron">
         <h1>{{service.name}}</h1>
     </div>
 </header>
 <body>
 
     <div class="container">
-       <dl>
-           <dt><a href="/" class="btn btn-default">Back to main page</a></dt>
-           <dt>Category</dt>
-           <dd class="view" >{{service.category}}</dd>
-           <dd class="edit" ><input id="category" type="text" value="{{service.category}}"></dd>
-           <dt>Price</dt>
-           <dd class="view" >{{service.price}}</dd>
-           <dd class="edit" ><input id="price" type="text" value="{{service.price}}"></dd>
-           <dt>Description</dt>
-           <dd class="view" >{{service.description}}</dd>
-           <dd class="edit" ><input id="description" type="text" value="{{service.description}}"></dd>
-           <dt>Duration</dt>
-           <dd class="view" >{{service.duration}}</dd>
-           <dd class="edit" ><input id="duration" type="text" value="{{service.duration}}"></dd>
-           <dt></dt>
-           <dd class="edit">
-               <input type="button" onclick="save()" value="Save" />
-               <input type="button" onclick="cancel()" value="Cancel" />
-           </dd>
-           <dt><button class="btn btn-default view"  onclick="edit()">Edit</button></dt>
-       </dl>
+        <div class="row">
+            <div class="col-sm-4">
+                <img class="img-rounded" src="{{service.image}}">
+            </div>
+            <div class="col-sm-4">
+               <dl>
+                   <dt><a href="/" class="btn btn-default">Back to main page</a></dt>
+                   <dt>Category</dt>
+                   <dd class="view" >{{service.category}}</dd>
+                   <dd class="edit" ><input id="category" type="text" value="{{service.category}}"></dd>
+                   <dt>Price</dt>
+                   <dd class="view" >{{service.price}}</dd>
+                   <dd class="edit" ><input id="price" type="text" value="{{service.price}}"></dd>
+                   <dt>Description</dt>
+                   <dd class="view" >{{service.description}}</dd>
+                   <dd class="edit" ><input id="description" class="multi" type="text" value="{{service.description}}"></dd>
+                   <dt>Duration</dt>
+                   <dd class="view" >{{service.duration}}</dd>
+                   <dd class="edit" ><input id="duration" type="text" value="{{service.duration}}"></dd>
+                   <dt></dt>
+                   <dd class="edit">
+                       <input type="button" onclick="save()" value="Save" />
+                       <input type="button" onclick="cancel()" value="Cancel" />
+                   </dd>
+                   <dt><button class="btn btn-default view"  onclick="edit()">Edit</button></dt>
+               </dl>
+            </div>
+        </div>
     </div>
 
 </body>

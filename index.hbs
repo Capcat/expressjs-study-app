@@ -18,41 +18,61 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <title>Services</title>
     <style>
-        * {
-            font-family: Arial;
+        .jumbotron{
+         background-image: url("");
+            margin-bottom: 0px;
+            background-image: url(https://www.negativespace.co/wp-content/uploads/2017/01/negativespace2-6-1062x708.jpg);
+            background-position: 0% 25%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+            text-shadow: black 0.1em 0.3em 0.3em;
+
         }
-        div{
-            padding: 1em;
-            font-size: 1.5em;
+        .btn-group{
+            padding-top: 1em;
+        }
+        img{
+            width: 8%;
+
         }
     </style>
 </head>
 <header>
-    <div class="container" style="background-color: aquamarine">
-        <h1  align="center">Services</h1>
+    <div class="jumbotron text-center">
+        <h1>Services</h1>
+        <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
     </div>
 </header>
 <body>
-    <div class="container" style="background-color: gold">
-        <a href="/sort/name">Sort by name</a>
-        <a href="/sort/price">Sort by price</a>
-        <table class="table">
-            <tr>
-                <td>
-                    {{#each services as |service|}}
-                        <div class="container">
-                            <a href="/{{service.id}}">
-                                <img src="{{service.image}}">
-                            </a>
-                            <a href="/{{service.id}}">
-                                {{service.name}}
-                            </a>
-                            {{service.price}}
-                        </div>
-                    {{/each}}
-                </td>
-            </tr>
-        </table>
+    <div class="container">
+        <div class="btn-group">
+            <button type="button menu" class="btn dropdown-toggle" data-toggle="dropdown">
+                Sort by <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="/sort/name">name</a></li>
+                <li><a href="/sort/price">price</a></li>
+            </ul>
+        </div>
+       <div class="row">
+           <table class="table">
+               <tr>
+                   <td>
+                       {{#each services as |service|}}
+                           <div class="well well-lg">
+                               <a href="/{{service.id}}">
+                                   <img class="img-circle" src="{{service.image}}">
+                               </a>
+                               <a href="/{{service.id}}">
+                                   {{service.name}}
+                               </a>
+                               {{service.price}}
+                           </div>
+                       {{/each}}
+                   </td>
+               </tr>
+           </table>
+       </div>
     </div>
 </body>
 </html>
