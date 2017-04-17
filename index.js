@@ -27,10 +27,10 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function (req, res) {
-  res.render('index', {services: services})
+  res.render('index', {})
 });
 
-app.get('/sort/:prop', function (req, res) {
+/*app.get('/sort/:prop', function (req, res) {
     let prop = req.params.prop;
     let sortedServices = services.sort(function (a, b) {
 
@@ -44,22 +44,61 @@ app.get('/sort/:prop', function (req, res) {
         return 0;
     });
     res.render('index', {services: sortedServices})
+});*/
+
+app.get('/favicon.ico', function(req, res) {
+    res.send(204);
+});
+
+app.get('/:id', function (req, res) {
+    let serviceId = req.params.id;
+    console.log("serviceId", serviceId);
+    //console.log("services", services);
+    const service = services.find((item)=> item.id === serviceId);
+    console.log("service", service);
+    res.render('service',service)
+});
+
+app.get('/:id', function (req, res) {
+    let serviceId = req.params.id;
+    console.log("serviceId", serviceId);
+    //console.log("services", services);
+    const service = services.find((item)=> item.id === serviceId);
+    console.log("service", service);
+    res.render('service',service)
 });
 
 
-app.get('/:id', function (req, res) {
-    let id = req.params.id;
-    service = services.find((item)=> item.id === id);
-    res.render('service',{service: service})
+// API
+
+app.get('/api/services', function (req, res) {
+    res.json(services);
+});
+
+app.get('/api/service/:id', function (req, res) {
+    let serviceId = req.params.id;
+    const service = services.find((item)=> item.id === serviceId);
+    res.json(service);
+});
+
+app.post('/api/service', function (req, res) {
+    const service = Object.assign({}, req.body);
+    console.log('serv', service);
+    service.id = (services.length + 1).toString();
+    services.push(service);
+    console.log('service.id', service.id);
+    //res.statusCode = 200;
+    res.end(service.id);
 });
 
 app.put('/api/service/:id', function (req, res) {
-    let id = req.params.id;
-    let service = services.find((item)=> item.id === id);
+    let serviceId = req.params.id;
+    let service = services.find((item)=> item.id === serviceId);
     service = Object.assign(service, req.body);
     console.log("service", service);
     res.end()
 });
+
 
 var server = app.listen(3000, function () {
     console.log('Server running at http//localhost:' + server.address().port)

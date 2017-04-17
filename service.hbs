@@ -8,36 +8,109 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js'></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
+
+        function vievModels() {
+            this.name = ko.observable('');
+            this.category = ko.observable('');
+            this.price = ko.observable();
+            this.description = ko.observable('');
+            this.duration = ko.observable();
+            this.image = ko.observable('');
+        }
+
+        var service;
+
         function save() {
-            $.ajax('/api/service/{{service.id}}', {
+            $.ajax('/api/service/' + window.location.pathname.slice(1), {
                 method: 'PUT',
                 data: {
-                    category: $('#category').val(),
-                    price: $('#price').val(),
-                    description: $('#description').val(),
-                    duration: $('#duration').val(),
+                    category: service.category,
+                    image: service.image,
+                    name: service.name,
+                    price: service.price,
+                    description: service.description,
+                    duration: service.duration,
                 },
                 complete: function () {
-                    cancel()
-                    location.reload();
+                    cancel();
+                   // location.reload();
+                    console.log("data", data);
+                }
+            })
+        }
+
+        function saveNewService() {
+            $.ajax('/api/service', {
+                method: 'POST',
+                data: {
+                    category: service.category,
+                    image: service.image,
+                    name: service.name,
+                    price: service.price,
+                    description: service.description,
+                    duration: service.duration,
+                },
+                complete: function (res) {
+                    cancel();
+                    // location.reload();
+                    console.log("this", this);
+                    console.log("this.data.id", this.data.id);
+                    console.log("service.id", service.id);
+                    //window.location.assign("/" + service.id);
                 }
             })
         }
 
         function init() {
-            var service = '{{service.name}}';
-            console.log("service", service);
-        }
-        init();
-        $( document ).ready(function() {
-            $('.view').show()
-            $('.edit').hide()
-        });
+            service = new vievModels();
+            ko.applyBindings({
+                service: service
+            });
 
+            $.ajax("api/service/" + window.location.pathname.slice(1), {
+                method: 'GET',
+                success: function (data) {
+                    service.name(data.name);
+                    service.category(data.category);
+                    service.price(data.price);
+                    service.description(data.description);
+                    service.duration(data.duration);
+                    service.image(data.image);
+                }
+            });
+        }
+        window.addEventListener('load', init);
+
+        function newService() {
+            var url = window.location.pathname;
+            var stuff = url.split('/');
+            var id = stuff[stuff.length-1];
+            if(id == 'add'){
+                console.log('id', id);
+                $( document ).ready(function() {
+                    $('.view').hide()
+                    $('.edit').show()
+                    $('.notNew').hide()
+                });
+            }
+            else {
+                $( document ).ready(function() {
+                    $('.view').show()
+                    $('.edit').hide()
+                });
+            }
+
+        }
+        newService();
         function edit() {
             $('.view').hide()
             $('.edit').show()
@@ -53,17 +126,17 @@
            width: 70%;
        }
        .jumbotron{
-           padding-left: 10em;
+           padding-left: 10%;
        }
         .multi{
-            width:200px;
+            width:400px;
             height:80px;
         }
     </style>
 </head>
 <header>
     <div class="jumbotron">
-        <h1>{{service.name}}</h1>
+        <h1 data-bind="text: service.name"></h1>
     </div>
 </header>
 <body>
@@ -71,27 +144,32 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <img class="img-rounded" src="{{service.image}}">
+                <img data-bind="attr: { src: service.image}" class="img-rounded"/>
             </div>
             <div class="col-sm-4">
                <dl>
                    <dt><a href="/" class="btn btn-default">Back to main page</a></dt>
+                   <dt class="edit">Name</dt>
+                   <dd class="edit" ><input data-bind="value: service.name" /></dd>
+                   <dt class="edit" >Image URL</dt>
+                   <dd class="edit" ><input data-bind="value: service.image" /></dd>
                    <dt>Category</dt>
-                   <dd class="view" >{{service.category}}</dd>
-                   <dd class="edit" ><input id="category" type="text" value="{{service.category}}"></dd>
+                   <dd class="view" data-bind="text: service.category"></dd>
+                   <dd class="edit" ><input data-bind="value: service.category" /></dd>
                    <dt>Price</dt>
-                   <dd class="view" >{{service.price}}</dd>
-                   <dd class="edit" ><input id="price" type="text" value="{{service.price}}"></dd>
+                   <dd class="view" data-bind="text: service.price" ></dd>
+                   <dd class="edit" ><input data-bind="value: service.price" /></dd>
                    <dt>Description</dt>
-                   <dd class="view" >{{service.description}}</dd>
-                   <dd class="edit" ><input id="description" class="multi" type="text" value="{{service.description}}"></dd>
+                   <dd class="view" data-bind="text: service.description"></dd>
+                   <dd class="edit" ><input data-bind="value: service.description"  class="multi" /></dd>
                    <dt>Duration</dt>
-                   <dd class="view" >{{service.duration}}</dd>
-                   <dd class="edit" ><input id="duration" type="text" value="{{service.duration}}"></dd>
+                   <dd class="view" data-bind="text: service.duration"></dd>
+                   <dd class="edit" ><input data-bind="value: service.duration" /></dd>
                    <dt></dt>
                    <dd class="edit">
-                       <input type="button" onclick="save()" value="Save" />
-                       <input type="button" onclick="cancel()" value="Cancel" />
+                       <input type="button" class="edit notNew" onclick="save()" value="Save" />
+                       <input type="button" class="edit new" onclick="saveNewService()" value="Save new" />
+                       <input type="button" class="edit notNew" onclick="cancel()" value="Cancel" />
                    </dd>
                    <dt><button class="btn btn-default view"  onclick="edit()">Edit</button></dt>
                </dl>

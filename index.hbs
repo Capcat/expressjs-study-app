@@ -12,16 +12,51 @@
     <script
             src="https://code.jquery.com/jquery-1.12.4.min.js"
             integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-            crossorigin="anonymous"></script>
-
+            crossorigin="anonymous">
+    </script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js'></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        var services = ko.observableArray([]);
+        var orderBy = ko.observable();
+        var columns = ['name' , 'category', 'price', 'duration']
+
+
+        function onRowClick(row) {
+            window.location= "/" + row.id;
+        }
+
+        function init() {
+            ko.applyBindings({
+                services: services
+            });
+
+            $.ajax("api/services", {
+                method: 'GET',
+                success: function (data) {
+                    console.log("services", data);
+                    services(data);
+                }
+            });
+        }
+
+        function sortBy() {
+            services.sort(function (left, right) {
+                return left[orderBy()] == right[orderBy()] ? 0 : (left[orderBy()] < right[orderBy()] ? -1 : 1)
+            });
+        }
+
+        window.addEventListener('load', init);
+    </script>
     <title>Services</title>
     <style>
+        .input-group-btn{
+            width: 70%;
+        }
         .jumbotron{
-         background-image: url("");
+            background-image: url(https://static.pexels.com/photos/34586/pexels-photo.jpg);
             margin-bottom: 0px;
-            background-image: url(https://www.negativespace.co/wp-content/uploads/2017/01/negativespace2-6-1062x708.jpg);
             background-position: 0% 25%;
             background-size: cover;
             background-repeat: no-repeat;
@@ -32,9 +67,10 @@
         .btn-group{
             padding-top: 1em;
         }
-        img{
-            width: 8%;
 
+        img{
+            width: 100%;
+            margin-top: 5%;
         }
     </style>
 </head>
@@ -47,30 +83,24 @@
 <body>
     <div class="container">
         <div class="btn-group">
-            <button type="button menu" class="btn dropdown-toggle" data-toggle="dropdown">
-                Sort by <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="/sort/name">name</a></li>
-                <li><a href="/sort/price">price</a></li>
-            </ul>
+            <a href="/add" class="btn btn-info" role="button">Add new service</a>
+            <span class="input-group-btn">
+                <select data-bind="options: columns, value: orderBy, click: sortBy()" class="form-control" ></select>
+            </span>
         </div>
        <div class="row">
            <table class="table">
-               <tr>
-                   <td>
-                       {{#each services as |service|}}
-                           <div class="well well-lg">
-                               <a href="/{{service.id}}">
-                                   <img class="img-circle" src="{{service.image}}">
-                               </a>
-                               <a href="/{{service.id}}">
-                                   {{service.name}}
-                               </a>
-                               {{service.price}}
-                           </div>
-                       {{/each}}
-                   </td>
-               </tr>
+               <tbody data-bind="foreach: services">
+                   <tr data-bind="click: onRowClick.bind($data)">
+                       <td style="width: 130px" ><img data-bind="attr: { src: image}" class="img-rounded" /></td>
+                       <td>
+                           <h4><p data-bind="text: name" ></p></h4>
+                           <b>Category: </b><span data-bind="text: category" ></span><br/>
+                           <b>Price: </b><span data-bind="text: price" ></span><br/>
+                           <b>Duration: </b><span data-bind="text: duration" ></span><br/>
+                       </td>
+                   </tr>
+               </tbody>
            </table>
        </div>
     </div>
