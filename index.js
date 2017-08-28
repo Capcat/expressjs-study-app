@@ -10,7 +10,7 @@ var services =[]
 fs.readFile('models/services.json', {encoding: 'utf8'}, function (err, data) {
     if (err) throw  err
 
-    JSON.parse(data).forEach(function (service) {
+    JSON.parse(data).map(function (service) {
         services.push(service)
     })
 })
